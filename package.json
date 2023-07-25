@@ -1,0 +1,13 @@
+{
+  "name": "pufferpanel-conditions",
+  "version": "1.0.0",
+  "description": "PufferPanel 'if' processor for frontend usage",
+  "license": "Apache v2",
+  "scripts": {
+    "build": "wasm-pack build --target nodejs",
+    "test": "node test.js"
+  },
+  "type": "module",
+  "author": "PufferPanel <dev@pufferpanel.com>",
+  "repository": "https://github.com/PufferPanel/conditions"
+}
