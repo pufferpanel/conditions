@@ -13,7 +13,10 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - uses: Swatinem/rust-cache@v2
 
       - name: Check out code
         uses: actions/checkout@v3
@@ -37,3 +40,8 @@ jobs:
           path: |
             pkg/*
           if-no-files-found: error
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
