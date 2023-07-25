@@ -24,6 +24,12 @@ jobs:
       - name: Cargo
         run: |
           cargo install wasm-pack
+          
+      - name: Increment version
+        run: |
+          git config --local user.name actions-user
+          git config --local user.email "actions@github.com"
+          npm version patch -m "Update patch version"
 
       - name: Build
         run: |
@@ -40,6 +46,10 @@ jobs:
           path: |
             pkg/*
           if-no-files-found: error
+
+      - name: Commit new version
+        run: |
+          git push -f origin main
 
       - name: Publish
         run: npm publish
