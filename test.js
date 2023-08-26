@@ -1,5 +1,8 @@
 import fs from 'fs'
+import {webcrypto} from 'node:crypto'
 import init, {resolve_if} from './pkg/conditions.js'
+
+globalThis.crypto = webcrypto
 
 const wasmBuf = fs.readFileSync('./pkg/conditions_bg.wasm')
 const wasm = await WebAssembly.compile(wasmBuf)
