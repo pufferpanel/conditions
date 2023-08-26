@@ -53,8 +53,6 @@ jobs:
 
       - name: Publish
         run: |
-          cp package.json pkg/package.json
-          tar -czf pufferpanel-conditions.tar.gz pkg/*
-          npm publish pufferpanel-conditions.tar.gz
+          npm publish pkg
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
