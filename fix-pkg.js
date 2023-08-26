@@ -1,7 +1,7 @@
 // take package.json from repo root and add wasm-packs output files
 // write that back to the wasm-pack output dir to make nodejs based test work
- 
-const fs = require('fs')
+
+import fs from 'fs'
 
 const rootPkgFile = fs.readFileSync('package.json', 'utf-8')
 const rootPkg = JSON.parse(rootPkgFile)
