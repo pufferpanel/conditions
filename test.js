@@ -1,4 +1,6 @@
-import {resolve_if} from './pkg/conditions.js'
+import conditions from './pkg/conditions.js'
+
+const {resolve_if} = conditions
 
 var tests = {
     'true': {
