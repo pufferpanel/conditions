@@ -53,6 +53,7 @@ jobs:
 
       - name: Publish
         run: |
+          cp package.json pkg/package.json
           cd pkg
           tar -czf pufferpanel-conditions.tar.gz *
           npm publish pufferpanel-conditions.tar.gz
