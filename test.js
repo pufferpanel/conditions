@@ -1,4 +1,4 @@
-import init, {require_if} from './pkg/conditions.js'
+import init, {resolve_if} from './pkg/conditions.js'
 
 await init()
 
