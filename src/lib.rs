@@ -1,3 +1,4 @@
+extern crate console_error_panic_hook;
 use rhai::{Engine, Scope};
 use wasm_bindgen::prelude::*;
 use rhai::packages::{CorePackage, Package};
@@ -5,6 +6,8 @@ use rhai::packages::BasicArrayPackage;
 
 #[wasm_bindgen]
 pub fn resolve_if(script: &str, data: &JsValue) -> Result<bool, String> {
+    console_error_panic_hook::set_once();
+
     let mut engine = Engine::new_raw();
 
     let core_package = CorePackage::new();

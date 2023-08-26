@@ -13,4 +13,5 @@ crate-type = ["cdylib"]
 wasm-bindgen = "0.2"
 rhai = { version = "1.15.0", features = ["std", "wasm-bindgen"] }
 getrandom = { version = "0.2", features = ["js"] }
+console_error_panic_hook = "0.1.7"
 js-sys = "*"
