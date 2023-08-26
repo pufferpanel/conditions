@@ -1,6 +1,8 @@
-import init, {resolve_if} from './pkg/conditions.js'
+import conditions from './pkg/conditions.js'
 
-await init()
+await conditions.default() // init wasm
+
+const {require_if} = conditions
 
 var tests = {
     'true': {
