@@ -1,6 +1,6 @@
-import conditions from './pkg/conditions.js'
+import init, {resolve_if} from './pkg/conditions.js'
 
-const {resolve_if} = conditions
+await init()
 
 var tests = {
     'true': {
