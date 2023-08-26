@@ -52,6 +52,9 @@ jobs:
           git push -f origin main
 
       - name: Publish
-        run: npm publish
+        run: |
+          cd pkg
+          tar -czf pufferpanel-conditions.tar.gz *
+          npm publish pufferpanel-conditions.tar.gz
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
