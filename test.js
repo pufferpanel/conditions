@@ -1,6 +1,9 @@
+import fs from 'fs'
 import init, {resolve_if} from './pkg/conditions.js'
 
-await init()
+const wasmBuf = fs.readFileSync('./pkg/conditions_bg.wasm')
+const wasm = await WebAssembly.compile(wasmBuf)
+await init(wasm)
 
 var tests = {
     'true': {
