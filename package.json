@@ -4,7 +4,7 @@
   "description": "PufferPanel 'if' processor for frontend usage",
   "license": "Apache v2",
   "scripts": {
-    "build": "wasm-pack build --target nodejs",
+    "build": "wasm-pack build --target bundler",
     "test": "node test.js"
   },
   "type": "module",
