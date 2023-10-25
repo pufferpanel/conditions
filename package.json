@@ -1,6 +1,6 @@
 {
   "name": "pufferpanel-conditions",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "PufferPanel 'if' processor for frontend usage",
   "license": "Apache v2",
   "scripts": {
