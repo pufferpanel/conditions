@@ -38,7 +38,9 @@ pub fn resolve_if(script: &str, data: &JsValue) -> Result<bool, String> {
         }
     }
 
-    let result = match engine.eval_expression_with_scope::<bool>(&mut scope, script) {
+    let altered = script.replace("'", "\"");
+
+    let result = match engine.eval_expression_with_scope::<bool>(&mut scope, &altered) {
         Ok(res) => res,
         Err(e) => return Err(e.to_string())
     };

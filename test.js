@@ -54,6 +54,11 @@ var tests = {
         result: true,
         script: '["1", "2", "3"].contains(needle)',
         data: {'needle': '2'}
+    },
+    'test single quotes': {
+        result: true,
+        script: 'loader == \'vanilla\'',
+        data: {'loader': 'vanilla'}
     }
 }
 
