@@ -1,3 +1,4 @@
 pkg/
 target/
 .idea/
+node_modules/

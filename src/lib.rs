@@ -22,21 +22,25 @@ pub fn resolve_if(script: &str, data: &JsValue) -> Result<bool, String> {
         Err(e) => return Err(e.as_string().unwrap())
     };
 
+    let mut vars = rhai::Map::new();
+
     for key in keys {
         let value = match js_sys::Reflect::get(data, &key) {
             Ok(res) => res,
             Err(e) => return Err(e.as_string().unwrap())
         };
 
-        let k = key.as_string().unwrap();
+        let k = key.as_string().unwrap().to_owned();
         if value.as_bool().is_some() {
-            scope.push(k, value.as_bool().unwrap());
+            vars.insert(k.into(), value.as_bool().unwrap().into());
         } else if value.as_f64().is_some() {
-            scope.push(k, value.as_f64().unwrap());
+            vars.insert(k.into(), value.as_f64().unwrap().into());
         } else if value.as_string().is_some() {
-            scope.push(k, value.as_string().unwrap());
+            vars.insert(k.into(), value.as_string().unwrap().into());
         }
     }
+
+    scope.push("vars", vars);
 
     let altered = script.replace("'", "\"");
 

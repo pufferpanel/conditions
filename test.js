@@ -2,7 +2,7 @@ import fs from 'fs'
 import {webcrypto} from 'node:crypto'
 import init, {resolve_if} from './pkg/conditions.js'
 
-globalThis.crypto = webcrypto
+//globalThis.crypto = webcrypto
 
 const wasmBuf = fs.readFileSync('./pkg/conditions_bg.wasm')
 const wasm = await WebAssembly.compile(wasmBuf)
@@ -11,37 +11,37 @@ await init(wasm)
 var tests = {
     'true': {
         result: true,
-        script: 'success',
+        script: 'vars.success',
         data: {'success': true}
     },
     'false': {
         result: false,
-        script: 'success',
+        script: 'vars.success',
         data: {'success': false}
     },
     'test AND pass': {
         result: true,
-        script: 'success && notFailed',
+        script: 'vars.success && vars.notFailed',
         data: {'success': true, 'notFailed': true}
     },
     'test OR pass': {
         result: true,
-        script: 'success || notFailed',
+        script: 'vars.success || vars.notFailed',
         data: {'success': false, 'notFailed': true}
     },
     'test string pass': {
         result: true,
-        script: 'name == "test"',
+        script: 'vars.name == "test"',
         data: {'name': 'test'}
     },
     'test string fail': {
         result: false,
-        script: 'name == "test"',
+        script: 'vars.name == "test"',
         data: {'name': 'not test'}
     },
     'test string not match pass': {
         result: false,
-        script: 'name != "test"',
+        script: 'vars.name != "test"',
         data: {'name': 'test'}
     },
     'throws if invalid': {
@@ -52,12 +52,17 @@ var tests = {
     },
     'test arrays': {
         result: true,
-        script: '["1", "2", "3"].contains(needle)',
+        script: '["1", "2", "3"].contains(vars.needle)',
         data: {'needle': '2'}
     },
     'test single quotes': {
         result: true,
-        script: 'loader == \'vanilla\'',
+        script: 'vars.loader == \'vanilla\'',
+        data: {'loader': 'vanilla'}
+    },
+    'test map reference': {
+        result: true,
+        script: 'vars["loader"] == "vanilla"',
         data: {'loader': 'vanilla'}
     }
 }
@@ -88,3 +93,6 @@ for (const testsKey in tests) {
         throw 'Test failed'
     }
 }
+
+console.log('------------------------------------')
+console.log('Tests passed')

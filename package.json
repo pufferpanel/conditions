@@ -5,12 +5,15 @@
   "license": "Apache v2",
   "scripts": {
     "build": "wasm-pack build --target web && node fix-pkg.js",
-    "test": "node test.js"
+    "test": "npm run build && node test.js"
   },
   "type": "module",
   "author": "PufferPanel <dev@pufferpanel.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PufferPanel/conditions.git"
+  },
+  "devDependencies": {
+    "wasm-pack": "^0.13.1"
   }
 }
