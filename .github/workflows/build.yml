@@ -9,6 +9,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - name: Set up Node
         uses: actions/setup-node@v3
@@ -26,17 +28,18 @@ jobs:
           cargo install wasm-pack
           
       - name: Increment version
+        if: ${{ env.NODE_AUTH_TOKEN != '' }}
         run: |
           git config --local user.name actions-user
           git config --local user.email "actions@github.com"
 
       - name: Increment major
-        if: ${{ contains(github.event.head_commit.message, '[major]') }}
+        if: ${{ env.NODE_AUTH_TOKEN != '' && contains(github.event.head_commit.message, '[major]') }}
         run: |
           npm version major -m "Update patch version"
 
       - name: Increment patch
-        if: ${{ !contains(github.event.head_commit.message, '[major]') }}
+        if: ${{ env.NODE_AUTH_TOKEN != '' && !contains(github.event.head_commit.message, '[major]') }}
         run: |
           npm version patch -m "Update patch version"
 
@@ -57,12 +60,13 @@ jobs:
           if-no-files-found: error
 
       - name: Commit new version
+        if: ${{ env.NODE_AUTH_TOKEN != '' }}
         run: |
           git push -f origin main
 
       - name: Publish
+        if: ${{ env.NODE_AUTH_TOKEN != '' }}
         run: |
           cd pkg
           npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
