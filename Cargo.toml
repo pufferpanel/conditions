@@ -1,6 +1,6 @@
 [package]
 name = "conditions"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "WASM compatible if parser for PufferPanel"
 repository = "https://github.com/PufferPanel/conditions"
@@ -10,8 +10,8 @@ license-file = "LICENSE"
 crate-type = ["cdylib"]
 
 [dependencies]
-wasm-bindgen = "0.2"
-rhai = { version = "1.15.0", features = ["std", "wasm-bindgen"] }
-getrandom = { version = "0.2", features = ["js"] }
-console_error_panic_hook = "0.1.7"
+wasm-bindgen = "*"
+rhai = { version = "*", features = ["std", "wasm-bindgen"] }
+getrandom = { version = "*", features = ["js"] }
+console_error_panic_hook = "*"
 js-sys = "*"
